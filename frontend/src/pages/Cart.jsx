@@ -120,7 +120,7 @@ const Cart = () => {
               >
                 <div className="flex items-center gap-4">
                   <img
-                    src={`http://localhost:5000/uploads/${item.product.image}`}
+                    src={`https://e-shop-bab7.onrender.com/uploads/${item.product.image}`}
                     alt={item.product.name}
                     className="w-20 h-20 object-cover rounded"
                   />
