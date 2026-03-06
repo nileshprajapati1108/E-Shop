@@ -177,7 +177,7 @@ const ProductManagement = () => {
                     src={
                       newImage
                         ? URL.createObjectURL(newImage)
-                        : `http://localhost:5000/uploads/${editProduct.image}`
+                        : `https://e-shop-bab7.onrender.com/uploads/${editProduct.image}`
                     }
                     className="w-20 h-20 mt-2 rounded object-cover"
                   />
