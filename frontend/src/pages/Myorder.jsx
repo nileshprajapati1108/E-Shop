@@ -111,7 +111,7 @@ const Myorder = () => {
                         className="cursor-pointer"
                       >
                         <img
-                          src={`http://localhost:5000/uploads/${item.product?.image}`}
+                          src={`https://e-shop-bab7.onrender.com/uploads/${item.product?.image}`}
                           alt={item.product?.name}
                           className="w-16 h-20 object-cover rounded-lg"
                         />
