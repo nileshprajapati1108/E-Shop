@@ -115,7 +115,7 @@ const ProductManagement = () => {
                 {/* Image */}
                 <td className="p-3">
                   <img
-                    src={`http://localhost:5000/uploads/${product.image}`}
+                    src={`https://e-shop-bab7.onrender.com/uploads/${product.image}`}
                     alt=""
                     className="w-12 h-12 object-cover rounded"
                   />
