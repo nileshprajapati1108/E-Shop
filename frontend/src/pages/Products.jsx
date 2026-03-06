@@ -65,7 +65,7 @@ const Products = () => {
 
             {/* Image */}
             <img
-              src={`http://localhost:5000/uploads/${product.image}`}
+              src={`https://e-shop-bab7.onrender.com/uploads/${product.image}`}
               alt={product.name}
               className="w-full h-40 object-contain rounded-lg bg-gray-100"
             />
