@@ -60,7 +60,7 @@ export default function Home() {
           {products.map((product) => (
             <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition flex flex-col">
               <img
-                src={`http://localhost:5000/uploads/${product.image}`}
+                src={`https://e-shop-1-fyr1.onrender.com/uploads/${product.image}`}
                 alt={product.name}
                 className="rounded-md mb-3 h-[200px] w-full object-cover"
               />
