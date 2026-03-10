@@ -3,12 +3,17 @@ import axios from "axios";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState(() => {
+    
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
   // get products
   const getProducts = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/product/all`,
+        `${import.meta.env.VITE_BACKEND_URL}/product/all`
       );
 
       if (res.data.success) {
@@ -22,6 +27,26 @@ export default function Home() {
   useEffect(() => {
     getProducts();
   }, []);
+
+  // Function to add product to cart
+  const addToCart = (product) => {
+    const exist = cart.find((item) => item._id === product._id);
+    let updatedCart;
+
+    if (exist) {
+      updatedCart = cart.map((item) =>
+        item._id === product._id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+    } else {
+      updatedCart = [...cart, { ...product, quantity: 1 }];
+    }
+
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    alert(`${product.name} added to cart!`);
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -58,7 +83,10 @@ export default function Home() {
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition flex flex-col">
+            <div
+              key={product._id}
+              className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition flex flex-col"
+            >
               <img
                 src={`https://e-shop-bab7.onrender.com/uploads/${product.image}`}
                 alt={product.name}
@@ -69,13 +97,27 @@ export default function Home() {
 
               <p className="text-green-600 font-bold mb-3">₹{product.price}</p>
 
-              <button className="mt-auto w-full bg-gray-900 text-white py-2 rounded hover:bg-gray-800">
+              <button
+                onClick={() => addToCart(product)}
+                className="mt-auto w-full bg-gray-900 text-white py-2 rounded hover:bg-gray-800"
+              >
                 Add to Cart
               </button>
             </div>
           ))}
         </div>
       </section>
+
+      <div className="fixed bottom-5 right-5 bg-white p-4 rounded-lg shadow-lg">
+        <h4 className="font-bold mb-2">Cart ({cart.length})</h4>
+        <ul>
+          {cart.map((item) => (
+            <li key={item._id} className="text-sm">
+              {item.name} x {item.quantity}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
